@@ -7,7 +7,7 @@ const StyledSection = styled.section`
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  background-color: ${props => props.theme.colors.red};
+  background-color: ${props => props.theme.colors.blue};
 `;
 
 export default StyledSection;

@@ -1,8 +1,0 @@
-.Person {
-  flex: 1 0 100%;
-  margin: 1em;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 5px #eee;
-  padding: 1em;
-  max-width: 500px;
-}
