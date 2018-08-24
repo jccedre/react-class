@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
+import styled, { keyframes, ThemeProvider } from 'styled-components';
+import { main } from './Styles/Main';
+import StyledSection from './Grid/StyledSection';
 import Person from './Person/Person';
 
 class App extends Component {
+
   state = {
     persons: [
       { name: 'Gianluca', age: 0.6 },
@@ -36,24 +40,26 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="header">
-          <h1>Hi, I'm a React app</h1>
-          <button onClick={() => this.switchNameHandler('Testing!!')}>Switch Name</button>    
-        </div>
+      <ThemeProvider theme={main}>
+        <StyledSection>
+          <div className="header">
+            <h1>Hi, I'm a React app</h1>
+            <button onClick={() => this.switchNameHandler('Testing!!')}>Switch Name</button>
+          </div>
 
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age} />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'Mike')}
-          changed={this.nameChangeHandler}>I like to sleep</Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age} />
-      </div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age} />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, 'Mike')}
+            changed={this.nameChangeHandler}>I like to sleep</Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age} />
+        </StyledSection>
+      </ThemeProvider>
     );
   }
 }
