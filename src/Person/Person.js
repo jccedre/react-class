@@ -22,7 +22,7 @@ const StyledPerson = styled.div`
   ${props => props.theme.media.medium`flex: 1 0 100%;`}
 `;
 
-const person = (props) => {
+const person = ( props ) => {
   return (
     <StyledPerson>
       <p onClick={props.click}>I'm a {props.name} and I am {props.age} years old!</p>

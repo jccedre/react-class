@@ -9,26 +9,16 @@ class App extends Component {
 
   state = {
     persons: [
-      { name: 'Gianluca', age: 0.6 },
-      { name: 'Kalie', age: 25 },
-      { name: 'Jean Carlos', age: 25 },
+      { id: '1adfafq', name: 'Gianluca', age: 0.6 },
+      { id: '1231231', name: 'Kalie', age: 25 },
+      { id: 'adadq12', name: 'Jean Carlos', age: 25 },
     ],
     otherState: 'other state',
+    showPersons: false,
   }
 
-  switchNameHandler = (newName) => {
-    // console.log('Was clicked');
-    // Don't do this: this.state.persons[0].name = 'JC';
-    this.setState( {
-      persons: [
-        { name: newName, age: 0.6 },
-        { name: 'Kalie', age: 25 },
-        { name: 'Jean Carlos', age: 25 },
-      ]
-    } )
-  }
 
-  nameChangeHandler = (event) => {
+  nameChangeHandler = ( event ) => {
     this.setState( {
       persons: [
         { name: 'Gianluca', age: 0.6 },
@@ -38,26 +28,46 @@ class App extends Component {
     } )
   }
 
+  deletePersonHandler = ( personIndex ) => {
+    //const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
+  }
+
+  togglePersonsHandler = ( event ) => {
+    const doesShow = this.state.showPersons;
+
+    this.setState({showPersons: !doesShow});
+  }
+
   render() {
+
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map((person, index) => {
+            return <Person
+              click={() => this.deletePersonHandler(index)}
+              name={person.name}
+              age={person.age}
+              key={person.id} />
+          })}
+        </div>
+      );
+    }
+
     return (
       <ThemeProvider theme={main}>
         <StyledSection>
           <div className="header">
             <h1>Hi, I'm a React app</h1>
-            <button onClick={() => this.switchNameHandler('Testing!!')}>Switch Name</button>
+            <button onClick={this.togglePersonsHandler}>Switch Name</button>
           </div>
+          {persons}
 
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age} />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, 'Mike')}
-            changed={this.nameChangeHandler}>I like to sleep</Person>
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age} />
         </StyledSection>
       </ThemeProvider>
     );
