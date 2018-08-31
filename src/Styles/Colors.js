@@ -13,6 +13,11 @@ const colors = {
   shadow: 'rgba(000, 000, 000, 0.3)',
   shadowHover: 'rgba(000, 000, 000, 0.4)',
   shadowActive: 'rgba(000, 000, 000, 0.5)',
+  red: '#AD2E24',
+  redHover: '#B44137',
+  redActive: '#BB544B',
+  white: '#fff',
+
 }
 
 export default colors;

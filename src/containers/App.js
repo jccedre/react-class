@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
-import './App.css';
-import styled, { keyframes, ThemeProvider } from 'styled-components';
-import { main } from './Styles/Main';
+import { ThemeProvider } from 'styled-components';
+import { main } from '../styles/Main';
 import StyledSection from './Grid/StyledSection';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+import Button from '../components/Button/Button';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    console.log('[App.js] Inside Constructor', props);
+  }
+
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount()');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()');
+  }
 
   state = {
     persons: [
@@ -49,33 +63,31 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] Inside render()');
 
     let persons = null;
+    let show = false;
 
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return <Person
-              click={() => this.deletePersonHandler(index)}
-              name={person.name}
-              age={person.age}
-              key={person.id}
-              changed={(event) => this.nameChangeHandler(event, person.id)}/>
-          })}
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangeHandler}/>
         </div>
       );
+      show = true;
     }
 
     return (
       <ThemeProvider theme={main}>
         <StyledSection>
-          <div className="header">
-            <h1>Hi, I'm a React app</h1>
-            <button onClick={this.togglePersonsHandler}>Switch Name</button>
-          </div>
+        <Cockpit
+          appTitle={this.props.title}
+          toggle={this.togglePersonsHandler}
+          buttonState={this.state.showPersons}/>
           {persons}
-
         </StyledSection>
       </ThemeProvider>
     );
