@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button';
+import Aux from '../../hoc/Aux';
 
 const StyledCockpit = styled.div`
   flex: 1 0 100%;
