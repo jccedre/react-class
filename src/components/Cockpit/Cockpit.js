@@ -18,6 +18,7 @@ const cockpit = ( props ) => {
         color={props.buttonState ? 'secondary' : 'primary'}>
           Switch Name
         </Button>
+        <Button click={props.login}>Log in</Button>
     </StyledCockpit>
   );
 };

@@ -6,6 +6,9 @@ import Persons from '../components/Persons/Persons';
 import Button from '../components/Button/Button';
 import Cockpit from '../components/Cockpit/Cockpit';
 
+
+export const AuthContext = React.createContext(false);
+
 class App extends PureComponent {
 
   constructor(props) {
@@ -20,6 +23,7 @@ class App extends PureComponent {
       otherState: 'other state',
       showPersons: false,
       toggleClicke: 0,
+      authenticated: false
     }
   }
 
@@ -29,6 +33,14 @@ class App extends PureComponent {
 
   componentDidMount() {
     console.log('[App.js] Inside componentDidMount()');
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+      console.log('[ UPDATE App.js] Inside getDerivedStateFromProps()', nextProps, prevState);
+  }
+
+  getSnapshotBeforeUpdate() {
+      console.log('[ UPDATE App.js] Inside getSnapshotBeforeUpdate()');
   }
 
   // shouldComponentUpdate(nextProps, nextState) {
@@ -82,6 +94,12 @@ class App extends PureComponent {
     });
   }
 
+  loginHandler = () => {
+    this.setState({
+      authenticated: true,
+    });
+  }
+
   render() {
     console.log('[App.js] Inside render()');
 
@@ -107,8 +125,12 @@ class App extends PureComponent {
         <Cockpit
           appTitle={this.props.title}
           toggle={this.togglePersonsHandler}
-          buttonState={this.state.showPersons}/>
-          {persons}
+          buttonState={this.state.showPersons}
+          login={this.loginHandler}/>
+          <AuthContext.Provider value={this.state.authenticated}>
+            {persons}
+          </AuthContext.Provider>
+
         </StyledSection>
       </ThemeProvider>
     );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { AuthContext } from '../../../containers/App';
 
 const StyledPerson = styled.div`
   flex: 1 0 50%;
@@ -45,6 +46,9 @@ class Person extends Component {
       console.log('[Person.js] Inside render()');
       return (
         <StyledPerson>
+          <AuthContext.Consumer>
+            { auth => auth ? <p>I'm authenticated!</p> : null}
+          </AuthContext.Consumer>
           <p onClick={this.props.click}>I'm a {this.props.name} and I am {this.props.age} years old!</p>
           <p>{this.props.children}</p>
           <input
